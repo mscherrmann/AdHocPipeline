@@ -10,7 +10,6 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-
 class Crawler:
     """
     A class used to crawl Ad-Hoc news from the website
