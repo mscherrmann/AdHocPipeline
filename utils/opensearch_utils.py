@@ -1,9 +1,9 @@
 def get_index_body(level, language):
-    if language =="de":
+    if language == "de":
         lang_str = "german"
     else:
         lang_str = "english"
-    
+
     if level == "document":
         body = {
             "settings": {
@@ -37,16 +37,18 @@ def get_index_body(level, language):
                           "type": "knn_vector",
                           "dimension": 768,
                           "method": {
-                          "name": "hnsw",
-                          "space_type": "cosinesimil",
-                          "engine": "nmslib"}},
+                              "name": "hnsw",
+                              "space_type": "cosinesimil",
+                              "engine": "nmslib"
+                              }
+                          },
                     "raw_body": {"type": "text", "analyzer": lang_str},
                     "topic": {"type": "keyword"},
                     "wkn": {"type": "keyword"}
                 }
             }
         }
-        
+
     else:
         body = {
             "settings": {
@@ -74,10 +76,12 @@ def get_index_body(level, language):
                           "type": "knn_vector",
                           "dimension": 768,
                           "method": {
-                          "name": "hnsw",
-                          "space_type": "cosinesimil",
-                          "engine": "nmslib"}},
-                    "sentence_id" :  {"type": "integer"},
+                              "name": "hnsw",
+                              "space_type": "cosinesimil",
+                              "engine": "nmslib"
+                              }
+                          },
+                    "sentence_id": {"type": "integer"},
                     "topic": {"type": "keyword"}
                 }
             }
