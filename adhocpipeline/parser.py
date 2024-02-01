@@ -14,7 +14,7 @@ class Parser():
     def __init__(
             self,
             language="de",
-            tmp_storage_path="data\\tmp",
+            tmp_storage_path=os.path.join("data", "tmp"),
             is_test_mode=False):
         """
         Parameters
@@ -72,13 +72,9 @@ class Parser():
                 print(f"Parsed {(announcement_idx + 1)/ len(document_ids):.2%}"
                       f" of ad-hoc announcements after "
                       f"{(time.time()-start)/60:.2f} minutes.")
-            try:
-                doc = parse_ad_hoc(raw_html, filename)
-                doc["body_text_raw"] = " ".join(doc["body_text"])
-                doc = sentence_split(doc, nlpDe=nlpDe, nlpEn=nlpEn)
-            except:
-                print(f"Parsing error in file: {filename}")
-                raise
+            doc = parse_ad_hoc(raw_html, filename)
+            doc["body_text_raw"] = " ".join(doc["body_text"])
+            doc = sentence_split(doc, nlpDe=nlpDe, nlpEn=nlpEn)
             parsed_docs.append(doc)
         parsed_docs = pd.DataFrame(parsed_docs)
 
@@ -98,8 +94,10 @@ class Parser():
         # Save
         if store_parsed_docs:
             parsed_docs.to_pickle(
-                self.__tmp_storage_path+"\\parsed_output.pkl"
-                )
+                os.path.join(
+                    self.__tmp_storage_path,
+                    "parsed_output.pkl"
+                ))
         # Return
         if return_parsed_docs:
             return parsed_docs

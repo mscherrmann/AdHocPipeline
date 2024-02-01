@@ -5,7 +5,9 @@ import time
 
 class Cleaner():
 
-    def __init__(self, language="de", tmp_storage_path="data\\tmp"):
+    def __init__(self,
+                 language="de",
+                 tmp_storage_path=os.path.join("data", "tmp")):
         """
         Parameters
         ----------
@@ -53,12 +55,17 @@ class Cleaner():
         docs = docs.loc[filtering, :]
         # Remove parsed docs
         if remove_parsed_docs:
-            path_parsed_docs = self.__tmp_storage_path + "\\parsed_output.pkl"
+            path_parsed_docs = os.path.join(
+                self.__tmp_storage_path,
+                "parsed_output.pkl")
             if os.path.isfile(path_parsed_docs):
                 os.remove(path_parsed_docs)
         # Save
         if store_cleaned_docs:
-            docs.to_pickle(self.__tmp_storage_path+"\\cleaned_output.pkl")
+            docs.to_pickle(
+                os.path.join(
+                    self.__tmp_storage_path,
+                    "cleaned_output.pkl"))
         # Return
         if return_cleaned_docs:
             return docs

@@ -109,7 +109,9 @@ class Crawler:
                     doc_id = re.findall(r"\&id=(\d+)$", url)
                     response = request.urlopen(url)
                     html = response.read()
-                    with open(self.__path+"\\"+doc_id[0]+'.html', 'w') as file:
+                    with open(
+                            os.path.join(self.__path, doc_id[0]+'.html'),
+                            'w') as file:
                         file.write(html.decode('utf-8'))
                     self.__page_index += 1
                     self.__counter += 1

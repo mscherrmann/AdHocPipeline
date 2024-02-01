@@ -8,8 +8,10 @@ import time
 class TopicClassifier():
 
     def __init__(self,
-                 classification_model="scherrmann/GermanFinBert_FP_AdHocMultilabel",
-                 tmp_storage_path="data\\tmp",
+                 classification_model=(
+                     "scherrmann/GermanFinBert_FP_AdHocMultilabel"
+                 ),
+                 tmp_storage_path=os.path.join("data", "tmp"),
                  batch_size=512,
                  classification_threshold=0.6,
                  language="de"):
@@ -42,9 +44,10 @@ class TopicClassifier():
         else:
             self.__device = "cpu"
         self.__batch_size = batch_size
-        self.__classification_pipe = pipeline("text-classification",
-                                              model=self.__classification_model,
-                                              device=self.__device)
+        self.__classification_pipe = \
+            pipeline("text-classification",
+                     model=self.__classification_model,
+                     device=self.__device)
         self.__classification_threshold = classification_threshold
         self.__language = language
         self.__label_names = ["Earnings", "SEO", "Management",

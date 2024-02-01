@@ -165,4 +165,4 @@ class OpenSearchUploader():
         # Create index if it is missing
         if index_name not in index_names:
             body = get_index_body(level, self.__language)
-            response = self.__client.indices.create(index_name, body=body)
+            self.__client.indices.create(index_name, body=body)

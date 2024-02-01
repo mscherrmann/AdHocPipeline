@@ -19,7 +19,9 @@ class Pipeline():
                  start_date="01.01.2014",
                  end_date=datetime.now().strftime("%d.%m.%Y"),
                  begin_from_start_date=False,
-                 topic_classification_model="scherrmann/GermanFinBert_FP_AdHocMultilabel",
+                 topic_classification_model=(
+                     "scherrmann/GermanFinBert_FP_AdHocMultilabel"
+                 ),
                  topic_classification_threshold=0.6,
                  topic_classification_batch_size=512,
                  embedding_model="paraphrase-multilingual-mpnet-base-v2",
